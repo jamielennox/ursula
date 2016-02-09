@@ -1,4 +1,17 @@
 ---
+# NOTE(jamielennox): I don't know how this works for others because it seems to
+# me like this version of APT can't validate the certs to connect to https
+# repos.
+- name: Disable SSL validation - bad!
+  gather_facts: no
+  hosts: all
+  tasks:
+    - name: Don't validate apt-get SSL certs - REMOVE ME
+      copy:
+        content: 'Acquire::https::apt-mirror.openstack.blueboxgrid.com::Verify-Peer "false";'
+        dest: /etc/apt/apt.conf.d/51bluebox
+        owner: root
+
 - name: common role for all hosts
   hosts: all
   gather_facts: force
