@@ -1,0 +1,17 @@
+[controller]
+compute.urstest.jamielennox.net
+
+[network]
+compute.urstest.jamielennox.net
+
+[db]
+compute.urstest.jamielennox.net
+
+[mongo_db]
+compute.urstest.jamielennox.net
+
+[compute]
+compute.urstest.jamielennox.net
+
+[cinder_volume]
+compute.urstest.jamielennox.net
