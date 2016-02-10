@@ -3,6 +3,9 @@
   lineinfile: dest=/etc/default/dnsmasq regexp="^DNSMASQ_EXCEPT="
               line="DNSMASQ_EXCEPT=lo"
 
+- name: install resolvconf
+  apt: name=resolvconf state=present
+
 - name: delete localhost dnsmask nameserver
   command: resolvconf -d lo.dnsmasq
 
