@@ -24,7 +24,7 @@ secrets:
   cloud_admin_password: asdf
   project_admin_password: asdf
 
-fqdn: "{{ ansible_fqdn }}"
+fqdn: openstack.urstest.jamielennox.net
 swift_fqdn: "{{ fqdn }}"
 floating_ip: "{{ controller_primary }}"
 undercloud_floating_ip: "{{ hostvars[groups['controller'][0]][primary_interface]['ipv4']['address'] }}"
@@ -143,7 +143,7 @@ apt_repos:
     key_url: https://apt-mirror.openstack.blueboxgrid.com/keys/ceph.key
 
 client:
-  self_signed_cert: true
+  self_signed_cert: false
 
 nova:
   libvirt_type: qemu
@@ -450,6 +450,31 @@ keystone:
       public_url: https://{{ endpoints.main }}:9511
       internal_url: https://{{ endpoints.main }}:9511
       admin_url: https://{{ endpoints.main }}:9511
+
+cacerts:
+  - name: arrrsula
+    content: |
+      -----BEGIN CERTIFICATE-----
+      MIIDeTCCAmGgAwIBAgIJAJ9JFCfNJlVjMA0GCSqGSIb3DQEBCwUAMFMxCzAJBgNV
+      BAYTAkFVMQwwCgYDVQQIDANOU1cxDzANBgNVBAcMBlN5ZG5leTEQMA4GA1UECgwH
+      cHlycnJhdDETMBEGA1UEAwwKcHlycnJhdC1jYTAeFw0xNjAyMDkyMjUyMzVaFw0y
+      NjAyMDYyMjUyMzVaMFMxCzAJBgNVBAYTAkFVMQwwCgYDVQQIDANOU1cxDzANBgNV
+      BAcMBlN5ZG5leTEQMA4GA1UECgwHcHlycnJhdDETMBEGA1UEAwwKcHlycnJhdC1j
+      YTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMWwGcNQn8gWx3+CsJ7c
+      yTb1VNQpZL76OscWih6JNd7jmFFl1EOWYjU/JiEirrif/ZtXzU/IxiBmeThgoTaD
+      yhwLdrsDTJgHc5gr+yzOpqA3u/QdfFcZkLkbySZZSmc7zmxxyb5JYfg+Jamnn1St
+      e4uba8Q81836XX6fTKzEShQ0c/LvHbauOM5Q46xwCG0ZJ0m690jxoGSc7GuRNOoZ
+      FGQHE2WyNaWKLvBj6gNd7BDXxNsttBFdH8AxTodl4Xl6Etrmp0HGJdUlwh4hHDUa
+      EsgYPm+eVRf0C2xtmoU3+ElapJqKNeVs2ur0x1cDKOFXRwl3G/FPb6W6aZUtJZRN
+      yl8CAwEAAaNQME4wHQYDVR0OBBYEFMvtiZR44PVf3JWxyYQLZfbX54qbMB8GA1Ud
+      IwQYMBaAFMvtiZR44PVf3JWxyYQLZfbX54qbMAwGA1UdEwQFMAMBAf8wDQYJKoZI
+      hvcNAQELBQADggEBADfzdhESThmswxoKvOPwIFYpgj3Bmycnw3/yEmerYm3mrOIi
+      MRFUN8ytOjBLuQiMneAO4Ua0pxjMouNZa8Sv7GDlw9dFK6ANJy8BXAn0y2DWtA35
+      RVPJXhWikUKNbbfCiT3u31rBkhrRwL+Ipf8gGsuu4dpaqwf/xOaWvjC8nDF3CzQy
+      QkFHW49Orv/ZKyiMBjFWnNIhXDM1oCI9pfE+2x9IrxhNv+6LB7uQXzae7+paK80H
+      1iGZvCSoXE8Y9Jq5vIkHIB4DtdLnGOzMPbHvJ4l8pviRsSinDOF61M5CLDkgqO60
+      3Bs4uGawJ5HChJLeYepKAZ37MEMcc32Xf8iQhcY=
+      -----END CERTIFICATE-----
 
 openstack_setup:
   add_users: True
