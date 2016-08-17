@@ -149,6 +149,19 @@ nova:
     verbose: True
   novnc_method: file
   novnc_url: https://file-mirror.openstack.blueboxgrid.com/novnc/novnc-0.5.1.tar.gz
+  flavors:
+    - flavor_id: 1
+      name: m1.tiny
+      ram: 512
+      disk: 10
+      ephemeral: 0
+      vcpus: 1
+    - flavor_id: 2
+      name: m1.small
+      ram: 2048
+      disk: 20
+      ephemeral: 0
+      vcpus: 1
 
 ceph:
   enabled: false

@@ -124,6 +124,3 @@
 
   - name: nova has a working api
     shell: . /root/stackrc; nova list | grep ID
-
-  - name: m1.tiny flavor has been embiggened
-    shell: mysql -e "select root_gb from nova.instance_types where name='m1.tiny';" | grep 10
