@@ -18,7 +18,7 @@
   roles:
     - role: preflight-checks
       tags: ['always', 'precheck']
-  environment: "{{ env_vars|default({}) }}"  
+  environment: "{{ env_vars|default({}) }}"
 
 - name: common role for all hosts
   hosts: all:!vyatta-*
@@ -419,3 +419,9 @@
       tags: ['ceph', 'ceph-update']
       when: ceph.enabled|default('False')|bool and (ceph.scaleout|default('False')|bool or upgrade_ceph|bool)
   environment: "{{ env_vars|default({}) }}"
+
+- name: Run shade test
+  hosts: shadetest
+  roles:
+    - shade-test
+  tags: [ 'test' ]
