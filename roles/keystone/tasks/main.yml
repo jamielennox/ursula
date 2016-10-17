@@ -14,8 +14,18 @@
         home=/nonexistent createhome=no
   when: not keystone_user|success
 
-- name: keystone config dir
-  file: dest=/etc/keystone state=directory
+- name: keystone config dirs
+  file: path={{ item.path }} state=directory owner={{ item.owner | default(omit) }} mode={{ item.mode | default(omit) }} group={{ item.group | default(omit) }}
+  with_items:
+    - path: /etc/keystone
+    - path: /etc/keystone/credential-keys
+      owner: keystone
+      group: keystone
+      mode: 0700
+
+- name: keystone key dirs
+  file: dest=/etc/keystone/fernet state=directory owner=keystone
+  with_it
 
 - name: keystone log dir
   file: dest=/var/log/keystone state=directory mode=2750 owner=keystone
@@ -86,6 +96,10 @@
   with_fileglob: ../templates/etc/keystone/*
   notify:
     - restart keystone services
+
+- name: credential encryption
+  command: keystone-manage credential_setup --keystone-user keystone --keystone-group keystone
+  run_once: True
 
 - include: k2k-idp.yml
   when: keystone.federation.enabled|bool and keystone.federation.idp.k2k.enabled|bool
